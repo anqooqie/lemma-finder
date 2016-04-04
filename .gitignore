@@ -1,0 +1,7 @@
+/bin/
+/files/word_net/*
+!/files/word_net/.gitkeep
+/lib/*
+!/lib/.gitkeep
+/tmp/*
+!/tmp/.gitkeep
