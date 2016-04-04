@@ -1,6 +1,6 @@
 /bin/
-/files/word_net/*
-!/files/word_net/.gitkeep
+/files/wordnet/*
+!/files/wordnet/.gitkeep
 /lib/*
 !/lib/.gitkeep
 /tmp/*

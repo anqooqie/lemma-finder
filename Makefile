@@ -1,12 +1,12 @@
 path_separator := $(shell LANG=C java -help 2>&1 | grep -q 'A : separated list' && echo ':' || echo ';')
 
-bin:  files/word_net/dict lib/jwnl.jar lib/commons-logging.jar lib/commons-lang3-3.4.jar lib/commons-io-2.4.jar $(shell find src -name '*.java')
+bin:  files/wordnet/dict lib/jwnl.jar lib/commons-logging.jar lib/commons-lang3-3.4.jar lib/commons-io-2.4.jar $(shell find src -name '*.java')
 	rm -rf '$@'
 	mkdir '$@'
 	find src -name '*.java' -print0 | xargs -0 javac -cp '$@${path_separator}lib/*' -d '$@' -encoding UTF-8
-	cat tmp/jwnl14-rc2/config/file_properties.xml | sed 's/<version publisher="Princeton" number="[^"]\+" language="en"\/>/<version publisher="Princeton" number="3.0" language="en"\/>/g' | sed 's/<param name="dictionary_path" value="[^"]\+"\/>/<param name="dictionary_path" value="files\/word_net\/dict"\/>/g' >bin/jp/ac/tsukuba/cs/kde/hfukuda/lemma_finder/file_properties.xml
+	cat tmp/jwnl14-rc2/config/file_properties.xml | sed 's/<version publisher="Princeton" number="[^"]\+" language="en"\/>/<version publisher="Princeton" number="3.0" language="en"\/>/g' | sed 's/<param name="dictionary_path" value="[^"]\+"\/>/<param name="dictionary_path" value="files\/wordnet\/dict"\/>/g' >bin/jp/ac/tsukuba/cs/kde/hfukuda/lemma_finder/file_properties.xml
 
-files/word_net/dict:
+files/wordnet/dict:
 	curl -L -o tmp/WordNet-3.0.tar.gz 'http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz'
 	tar zxvf tmp/WordNet-3.0.tar.gz -C tmp
 	rm tmp/WordNet-3.0.tar.gz
