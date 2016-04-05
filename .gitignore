@@ -3,6 +3,7 @@
 !/files/wordnet/.gitkeep
 /lib/*
 !/lib/.gitkeep
+/local/
 /tmp/*
 !/tmp/.gitkeep
 /lemma-finder.jar
