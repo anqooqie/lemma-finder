@@ -5,3 +5,4 @@
 !/lib/.gitkeep
 /tmp/*
 !/tmp/.gitkeep
+/lemma-finder.jar
