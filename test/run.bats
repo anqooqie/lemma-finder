@@ -2,7 +2,7 @@
 
 task() {
   PATH_SEPARATOR="$(LANG=C java -help 2>&1 | grep -q 'A : separated list' && echo ':' || echo ';')"
-  java -cp 'bin'"$PATH_SEPARATOR"'lib/*' jp.ac.tsukuba.cs.kde.hfukuda.lemma_finder.Main 2>/dev/null | sed 's/\r//g'
+  java -cp 'bin'"$PATH_SEPARATOR"'lib/*' jp.ac.tsukuba.cs.kde.hfukuda.lemma_finder.Main | sed 's/\r$//g'
 }
 
 @test '単語の原型を取得する' {

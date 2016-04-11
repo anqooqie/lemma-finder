@@ -5,6 +5,7 @@ bin: files/wordnet/dict lib/jwnl.jar lib/commons-logging.jar lib/commons-io-2.4.
 	mkdir '$@'
 	find src -name '*.java' -print0 | xargs -0 javac -cp '$@${path_separator}lib/*' -d '$@' -encoding UTF-8
 	cat tmp/jwnl14-rc2/config/file_properties.xml | sed 's/<version publisher="Princeton" number="[^"]\+" language="en"\/>/<version publisher="Princeton" number="3.0" language="en"\/>/g' | sed 's/<param name="dictionary_path" value="[^"]\+"\/>/<param name="dictionary_path" value="files\/wordnet\/dict"\/>/g' >bin/jp/ac/tsukuba/cs/kde/hfukuda/lemma_finder/file_properties.xml
+	echo 'org.apache.commons.logging.Log=org.apache.commons.logging.impl.NoOpLog' >bin/commons-logging.properties
 
 files/wordnet/dict:
 	curl -L -o tmp/WordNet-3.0.tar.gz 'http://wordnetcode.princeton.edu/3.0/WordNet-3.0.tar.gz'
