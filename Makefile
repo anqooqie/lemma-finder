@@ -12,6 +12,7 @@ files/wordnet/dict:
 	tar zxvf tmp/WordNet-3.0.tar.gz -C tmp
 	rm tmp/WordNet-3.0.tar.gz
 	cp -r tmp/WordNet-3.0/dict '$@'
+	find '$@' -type f -print0 | xargs -0 chmod 644
 	rm -rf tmp/WordNet-3.0
 
 lib/jwnl.jar: tmp/jwnl14-rc2
