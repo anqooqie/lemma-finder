@@ -1,6 +1,6 @@
 path_separator := $(shell LANG=C java -help 2>&1 | grep -q 'A : separated list' && echo ':' || echo ';')
 
-bin: files/wordnet/dict lib/jwnl.jar lib/commons-logging.jar lib/commons-io-2.4.jar $(shell find src -name '*.java')
+bin: files/wordnet/dict lib/jwnl.jar lib/commons-logging.jar $(shell find src -name '*.java')
 	rm -rf '$@'
 	mkdir '$@'
 	find src -name '*.java' -print0 | xargs -0 javac -cp '$@${path_separator}lib/*' -d '$@' -encoding UTF-8
@@ -25,13 +25,6 @@ tmp/jwnl14-rc2:
 	curl -L -o tmp/jwnl14-rc2.zip 'http://downloads.sourceforge.net/project/jwordnet/jwnl/JWNL%201.4/jwnl14-rc2.zip'
 	unzip tmp/jwnl14-rc2.zip -d tmp
 	rm tmp/jwnl14-rc2.zip
-
-lib/commons-io-2.4.jar:
-	curl -L -o tmp/commons-io-2.4-bin.tar.gz 'http://ftp.jaist.ac.jp/pub/apache/commons/io/binaries/commons-io-2.4-bin.tar.gz'
-	tar zxvf tmp/commons-io-2.4-bin.tar.gz -C tmp
-	rm tmp/commons-io-2.4-bin.tar.gz
-	cp tmp/commons-io-2.4/commons-io-2.4.jar '$@'
-	rm -rf tmp/commons-io-2.4
 
 lemma-finder.jar: bin
 	jar cf '$@' -C '$<' .
