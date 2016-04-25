@@ -23,14 +23,16 @@ public class LemmaFinder {
 
 	private static final Pattern INCLUDING_NUMBER = Pattern.compile("[0-9]");
 	public static final String findLemma(final String term, final POS pos) throws JWNLException {
-		IndexWord indexWord = dictionary.lookupIndexWord(pos, term);
-		// 見出し語が見つからなかった
-		if (indexWord == null) return null;
+		synchronized (dictionary) {
+			IndexWord indexWord = dictionary.lookupIndexWord(pos, term);
+			// 見出し語が見つからなかった
+			if (indexWord == null) return null;
 
-		// 名詞の複数形は独立した見出し語になっている場合があるので、単数形が無いか再検索する
-		if (pos == POS.NOUN && !INCLUDING_NUMBER.matcher(indexWord.getLemma()).find()) {
-			indexWord = dictionary.getMorphologicalProcessor().lookupBaseForm(pos, indexWord.getLemma());
+			// 名詞の複数形は独立した見出し語になっている場合があるので、単数形が無いか再検索する
+			if (pos == POS.NOUN && !INCLUDING_NUMBER.matcher(indexWord.getLemma()).find()) {
+				indexWord = dictionary.getMorphologicalProcessor().lookupBaseForm(pos, indexWord.getLemma());
+			}
+			return indexWord.getLemma();
 		}
-		return indexWord.getLemma();
 	}
 }
