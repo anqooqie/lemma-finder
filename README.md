@@ -8,8 +8,8 @@ This program shows lemmas of each word using WordNet.
 ```bash
 git clone https://github.com/anqooqie/lemma-finder.git
 cd lemma-finder
-make
-java -cp 'bin:lib/*' jp.ac.tsukuba.cs.kde.hfukuda.lemma_finder.Main <input >output
+mvn package dependency:copy-dependencies -Dmaven.test.skip=true
+java -jar target/lemma-finder-"$(mvn help:evaluate -Dexpression=project.version | grep -v INFO)".jar /path/to/wordnet/dictionary <input >output
 ```
 
 ## Example of Input
@@ -22,27 +22,8 @@ java -cp 'bin:lib/*' jp.ac.tsukuba.cs.kde.hfukuda.lemma_finder.Main <input >outp
     version			
     woman			
 
-## Note
-The following script outputs only lemmas as nouns.
-
-```bash
-java -cp 'bin:lib/*' jp.ac.tsukuba.cs.kde.hfukuda.lemma_finder.Main <input | cut -f 1 >output
-```
-
-The following script outputs only lemmas as verbs.
-
-```bash
-java -cp 'bin:lib/*' jp.ac.tsukuba.cs.kde.hfukuda.lemma_finder.Main <input | cut -f 2 >output
-```
-
-The following script outputs only lemmas as adjectives.
-
-```bash
-java -cp 'bin:lib/*' jp.ac.tsukuba.cs.kde.hfukuda.lemma_finder.Main <input | cut -f 3 >output
-```
-
-The following script outputs only lemmas as adverbs.
-
-```bash
-java -cp 'bin:lib/*' jp.ac.tsukuba.cs.kde.hfukuda.lemma_finder.Main <input | cut -f 4 >output
-```
+The output has four tab-separated fields.
+The first field shows lemmas as nouns.
+The second field shows lemmas as verbs.
+The third field shows lemmas as adjectives.
+The fourth field shows lemmas as adverbs.
