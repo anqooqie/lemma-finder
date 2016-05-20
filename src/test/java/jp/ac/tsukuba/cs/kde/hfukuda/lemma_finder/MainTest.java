@@ -16,7 +16,7 @@ import net.didion.jwnl.data.POS;
 
 public class MainTest {
 	@BeforeClass
-	public static void setUp() throws IOException, JWNLException {
+	public static void setUpBeforeClass() throws IOException, JWNLException {
 		final Path wordNetDictionaryPath = Paths.get("target/lemma-finder/wordnet/dictionary");
 		WordNetDictionaryDownloader.downloadDictionary(wordNetDictionaryPath);
 		LemmaFinder.initialize(wordNetDictionaryPath);
