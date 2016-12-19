@@ -29,9 +29,9 @@ public class LemmaFinder {
 
 	private static final Pattern INCLUDING_NUMBER = Pattern.compile("[0-9]");
 	public static final Optional<String> findLemma(final String term, final POS pos) throws JWNLException {
-		synchronized (dictionary) {
-			if (dictionary == null) throw new IllegalStateException("LemmaFinderは未初期化です。");
+		if (dictionary == null) throw new IllegalStateException("LemmaFinderは未初期化です。");
 
+		synchronized (dictionary) {
 			IndexWord indexWord = dictionary.lookupIndexWord(pos, term);
 			// 見出し語が見つからなかった
 			if (indexWord == null) return Optional.empty();
